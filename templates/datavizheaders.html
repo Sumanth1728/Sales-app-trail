@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <img src="{{url_for('static', filename='1.png')}}" alt="Histogram">
+    {% for i in headers %}
+    <p>{{i}}</p>
+    {% endfor %}
+  </body>
+</html>
