@@ -46,6 +46,7 @@ def index():
 @app.route('/SelectGraphFields/', methods=['GET', 'POST'])
 def SelectGraphFields():
     headers=list(grp.headers())
+
     list1=list()
     for i in headers:
         k=(i,i)
@@ -60,7 +61,7 @@ def SelectGraphFields():
         var2=form.var2.data
         return redirect(url_for("GraphOptions",var1=var1,var2=var2))
 
-    return render_template('datavizheaders.html',headers=headers,form=form)
+    return render_template('datavizheaders.html',headers=headers,form=form,tables=[grp.data.head().to_html(classes='data', header="true")])
 
 
 @app.route('/GraphOptions/<var1>&<var2>', methods=['GET', 'POST'])
@@ -81,37 +82,46 @@ def GraphOptions(var1,var2):
 
 @app.route('/GraphVisualization/<var1>&<var2>&<Graphchoice>', methods=['GET', 'POST'])
 def GraphVisualization(var1,var2,Graphchoice):
+    #calling the drawgraphs function to plot graphs
     n=DrawGraph(var1,var2,Graphchoice)
 
 
     return render_template('graph.html',n=str(n))
 
+#Function to return graph choices based on data selected
 def GraphList(var1,var2):
     if(var2=="None"):
+        #univariant Analysis
         try:
             a=int(grp.DataCat(var1))
             n=[("LineChart","LineChart"),("AreaChart","AreaChart")]
         except Exception as e:
             n=[("BarChart","BarChart"),("DonutChart","DonutChart")]
     else:
+        #Bivariant Analysis
         try:
             a=int(grp.DataCat(var1))
             try:
+                # graph between two continous data
                 a=int(grp.DataCat(var2))
                 n=[("ScatterPlot","ScatterPlot"),("HexPlot","HexPlot")]
 
             except Exception as e:
+                # graph between continous and categorical data
                 n=[("None","no graphs Availble for this combination")]
         except Exception as e:
             try:
+                # graph between continous and categorical data
                 a=int(grp.DataCat(var2))
                 n=[("None","no graphs Availble for this combination")]
 
             except Exception as e:
+                # graph between two categorical data
                 n=[("None","no graphs Availble for this combination")]
 
     return n
 
+# Function to draw graphs based on the data passed
 def DrawGraph(var1,var2,Graphchoice):
     if(Graphchoice=="LineChart"):
         n=grp.linechart(var1)
