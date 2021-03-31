@@ -98,7 +98,7 @@ def GraphList(var1,var2):
             a=int(grp.DataCat(var1))
             try:
                 a=int(grp.DataCat(var2))
-                n=[("None","no graphs Availble for this combination")]
+                n=[("ScatterPlot","ScatterPlot"),("HexPlot","HexPlot")]
 
             except Exception as e:
                 n=[("None","no graphs Availble for this combination")]
