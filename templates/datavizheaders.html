@@ -5,6 +5,19 @@
     <title></title>
   </head>
   <body>
+    <h1>Sample data in the file</h1>
+    <div style="height: 350px;width: 50%;overflow: scroll;">
+
+    {% for table in tables %}
+
+              {{ table|safe }}
+  {% endfor %}
+    </div>
+  <br>
+  <br>
+  <b>
+    <h1>Please select the fields you want to do analysis on </h1>
+  </b>
     <form  method="POST" >
         {{ form.hidden_tag() }}
         <table border = "0" cellspacing=20%>
@@ -14,6 +27,7 @@
                   <td>  :  </td>
                   <td>{{ form.var1 }}</td>
                </tr>
+               <p>If you want univariant analysis please leave the 2nd field as None</p>
                <tr>
                   <th>{{ form.var2.label }}</th>
                   <td>  :  </td>
