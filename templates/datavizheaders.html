@@ -5,9 +5,25 @@
     <title></title>
   </head>
   <body>
-    <img src="{{url_for('static', filename='1.png')}}" alt="Histogram">
-    {% for i in headers %}
-    <p>{{i}}</p>
-    {% endfor %}
+    <form  method="POST" >
+        {{ form.hidden_tag() }}
+        <table border = "0" cellspacing=20%>
+
+               <tr>
+                  <th>{{ form.var1.label }}</th>
+                  <td>  :  </td>
+                  <td>{{ form.var1 }}</td>
+               </tr>
+               <tr>
+                  <th>{{ form.var2.label }}</th>
+                  <td>  :  </td>
+                  <td>{{ form.var2 }}</td>
+               </tr>
+               </table>
+
+          <br>
+          <br>
+             {{ form.submit() }}
+        </form>
   </body>
 </html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>These are graph possible based on your choices </h1>
+    <form  method="POST" >
+        {{ form.hidden_tag() }}
+
+                  {{ form.GraphChoice.label }}
+                  <br>
+                  {{ form.GraphChoice }}
+
+          <br>
+          <br>
+             {{ form.submit() }}
+        </form>
+  </body>
+</html>
